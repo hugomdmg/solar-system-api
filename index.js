@@ -3,7 +3,13 @@ const cors = require('cors')
 const app = express()
 const port = process.env.PORT || 3000
 
-app.use(cors())
+const corsOptions = {
+    origin: 'https://solar-system-explore.vercel.app',
+    methods: 'GET, POST',
+    allowedHeaders: 'Content-Type'
+};
+
+app.use(cors(corsOptions))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
