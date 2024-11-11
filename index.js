@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
 app.get('/', (req, res) => {
-    res.send({ value: 'hola mundo' })
+    res.send({ value: 'solar system api' })
 })
 
 let ships = []
