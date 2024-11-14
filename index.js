@@ -30,7 +30,7 @@ setInterval(() => {
     if (shots.length > 5) {
         shots.splice(0, shots.length - 5);
     }
-}, 30)
+}, 100)
 
 setInterval(() => {
     ships = []
