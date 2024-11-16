@@ -2,6 +2,8 @@ const express = require('express')
 const cors = require('cors')
 const app = express()
 const port = process.env.PORT || 3000
+const path = require('path');
+
 
 const corsOptions = {
     // origin: 'https://solar-system-explore.vercel.app',
@@ -35,6 +37,9 @@ setInterval(() => {
 setInterval(() => {
     ships = []
 }, 3000);
+
+app.use('/images', express.static(path.join(__dirname, 'public')));
+
 
 app.post('/ships', (req, res) => {
     let inThelist = false
