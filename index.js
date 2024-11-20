@@ -53,8 +53,8 @@ app.get('/send-email', async (req, res) => {
     const mailOptions = {
         from: process.env.EMAIL_USER,
         to: process.env.EMAIL_USER,
-        subject: 'test',
-        text: 'test',
+        subject: 'PORTFOLIO VISIT',
+        text: 'There is a new visit in the portfolio',
     };
 
     try {
