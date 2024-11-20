@@ -3,6 +3,10 @@ const cors = require('cors')
 const app = express()
 const port = process.env.PORT || 3000
 const path = require('path');
+require('dotenv').config();
+
+
+const nodemailer = require('nodemailer');
 
 
 const corsOptions = {
@@ -36,6 +40,32 @@ app.use('/images', express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => { res.send({ value: 'solar system api' }) })
 app.get('/shots-data', (req, res) => { res.send({ value: shots }) })
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+    },
+});
+
+app.get('/send-email', async (req, res) => {
+
+    const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: process.env.EMAIL_USER,
+        subject: 'test',
+        text: 'test',
+    };
+
+    try {
+        await transporter.sendMail(mailOptions);
+        res.status(200).json({ message: 'Correo enviado con éxito.' });
+    } catch (error) {
+        console.error('Error al enviar el correo:', error);
+        res.status(500).json({ message: 'Error al enviar el correo.', error });
+    }
+});
 
 app.post('/ships', (req, res) => {
     let inThelist = false
