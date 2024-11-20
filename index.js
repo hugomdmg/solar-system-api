@@ -50,7 +50,6 @@ const transporter = nodemailer.createTransport({
 });
 
 app.get('/send-email', async (req, res) => {
-
     const mailOptions = {
         from: process.env.EMAIL_USER,
         to: process.env.EMAIL_USER,
@@ -60,10 +59,9 @@ app.get('/send-email', async (req, res) => {
 
     try {
         await transporter.sendMail(mailOptions);
-        res.status(200).json({ message: 'Correo enviado con éxito.' });
+        res.status(200).json({ message: 'success.' });
     } catch (error) {
-        console.error('Error al enviar el correo:', error);
-        res.status(500).json({ message: 'Error al enviar el correo.', error });
+        res.status(500).json({ message: 'Error sending mail.', error });
     }
 });
 
